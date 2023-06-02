@@ -1,11 +1,16 @@
 import { process } from '/env'
+import { Configuration, OpenAIApi } from 'openai'
+
 
 const setupTextarea = document.getElementById('setup-textarea') 
 const setupInputContainer = document.getElementById('setup-input-container')
 const movieBossText = document.getElementById('movie-boss-text')
 
-const apiKey = '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'
-const url = 'https://api.openai.com/v1/completions'
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY
+})
+
+const openai = new OpenAIApi(configuration)
 
 document.getElementById("send-btn").addEventListener("click", () => {
   // if (setupTextarea.value) {
@@ -16,7 +21,7 @@ document.getElementById("send-btn").addEventListener("click", () => {
 })
 
 function fetchBotReply(){
-  fetch(url,{
+  fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -24,11 +29,10 @@ function fetchBotReply(){
     },
     body: JSON.stringify({
       'model': 'text-davinci-003',
-      'prompt': 'Sound enthusiastic in five words or less.'
+      'prompt': 'Sound enthusiastic in five words or less.' 
     })
   }).then(response => response.json()).then(data => 
-    movieBossText.innerText = data.choices[0].text
+  movieBossText.innerText = data.choices[0].text
   )
-// {id: "cmpl-78rekXLd1GewCaHDNV4Dm5GlDUmui", object: "text_completion", created: 1682347234, model: "text-davinci-003", choices: [{text: " Excitedly enthusiastic!", index: 0, logprobs: null, finish_reason: "stop"}], usage: {prompt_tokens: 8, completion_tokens: 7, total_tokens: 15}}
 }
 
