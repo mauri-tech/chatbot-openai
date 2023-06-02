@@ -2,7 +2,7 @@ const setupTextarea = document.getElementById('setup-textarea')
 const setupInputContainer = document.getElementById('setup-input-container')
 const movieBossText = document.getElementById('movie-boss-text')
 
-const apiKey = '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'
+const apiKey = 'sk-Hrqw5k2zpyR3D3EGyV3ET3BlbkFJo8jdgkD5MnqwrfEjuAn(Example of api key)'
 const url = 'https://api.openai.com/v1/completions'
 
 document.getElementById("send-btn").addEventListener("click", () => {
